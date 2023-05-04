@@ -1,0 +1,6 @@
+.todo-list li .icon-destroy {
+  right: 10px;
+}
+.todo-list li .icon-destroy:after {
+  content: "×";
+}
