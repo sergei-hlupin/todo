@@ -1,9 +1,10 @@
 import React from "react";
 import "./todoFilter.css";
 
-function TodoFilter() {
+export default class TodoFilter extends React.Component {
+  render() {
     return (
-        <ul className="filters">
+      <ul className="filters">
         <li>
           <button className="selected">All</button>
         </li>
@@ -14,7 +15,6 @@ function TodoFilter() {
           <button>Completed</button>
         </li>
       </ul>
-    )
+    );
+  }
 }
-
-export default TodoFilter;

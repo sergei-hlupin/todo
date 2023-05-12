@@ -2,11 +2,11 @@ import React from "react";
 import "./TodoList.css";
 import Todo from "../todo/Todo";
 
-function TodoList(props) {
+function TodoList({todos, onDeleted}) {
   return (
     <ul className="todo-list">
-      {props.todos.map((item) => {
-        return <Todo todo={item} key = {item.id} />;
+      {todos.map((item) => {
+        return <Todo todo={item} key={item.id} onDeleted={() => onDeleted(item.id)} />;
       })}
     </ul>
   );
