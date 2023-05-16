@@ -5,13 +5,18 @@ import NewTodo from "../newTodo/NewTodo";
 import Footer from "../footer/Footer";
 
 export default class TodoApp extends Component {
+  id = 1;
   state = {
-    todos: [
-      { id: 1, completed: false, title: "купить молоко" },
-      { id: 2, completed: false, title: "купить хлеб" },
-      { id: 3, completed: false, title: "купить сахар" },
-    ],
+    filter: "",
+    todos: [],
   };
+  createTodoItem(title) {
+    return {
+      title,
+      id: this.id++,
+      completed: false,
+    };
+  }
   deleteItem = (id) => {
     this.setState(({ todos }) => {
       const idx = todos.findIndex((el) => el.id === id);
@@ -21,16 +26,69 @@ export default class TodoApp extends Component {
       };
     });
   };
+  addItem = (title) => {
+    const newItem = this.createTodoItem(title);
+    this.setState(({ todos }) => {
+      const newArr = [...todos, newItem];
+      return { todos: newArr };
+    });
+  };
+  onToggleDone = (id) => {
+    this.setState(({ todos }) => {
+      const idx = todos.findIndex((el) => el.id === id);
+      const oldItem = todos[idx];
+      const newItem = { ...oldItem, completed: !oldItem.completed };
+      const newArr = [...todos.slice(0, idx), newItem, ...todos.slice(idx + 1)];
+      return {
+        todos: newArr,
+      };
+    });
+  };
+  onActive = () => {
+    this.setState({ filter: "active" });
+  };
+  onCompleted = () => {
+    this.setState({ filter: "completed" });
+  };
+  onAll = () => {
+    this.setState({ filter: "all" });
+  };
+  clearCompleted = () => {
+    this.setState(({ todos }) => {
+      let newArr = todos.filter((item) => item.completed === false);
+      return {
+        todos: newArr,
+      };
+    });
+  };
   render() {
+    let filter = this.state.filter;
+    let copyArr = [...this.state.todos];
+    let todos = copyArr.filter((item) => {
+      if (filter === "active") {
+        return !item.completed;
+      }
+      if (filter === "completed") {
+        return item.completed;
+      }
+      if (filter === "all") {
+        return item.completed || !item.completed;
+      }
+      return copyArr;
+    });
+    const counter = todos.filter((item) => item.completed === false).length;
     return (
       <section className="todoapp">
-        <header className="header">
-          <h1>todos</h1>
-          <NewTodo />
-        </header>
+        <NewTodo addItem={this.addItem} />
         <section className="main">
-          <TodoList todos={this.state.todos} onDeleted={this.deleteItem} />
-          <Footer />
+          <TodoList todos={todos} onDeleted={this.deleteItem} onToggleDone={this.onToggleDone} />
+          <Footer
+            onAll={this.onAll}
+            onActive={this.onActive}
+            onCompleted={this.onCompleted}
+            clearCompleted={this.clearCompleted}
+            counter={counter}
+          />
         </section>
       </section>
     );

@@ -6,13 +6,15 @@ export default class TodoFilter extends React.Component {
     return (
       <ul className="filters">
         <li>
-          <button className="selected">All</button>
+          <button onClick={this.props.onAll} className="selected">
+            All
+          </button>
         </li>
         <li>
-          <button>Active</button>
+          <button onClick={this.props.onActive}>Active</button>
         </li>
         <li>
-          <button>Completed</button>
+          <button onClick={this.props.onCompleted}>Completed</button>
         </li>
       </ul>
     );
