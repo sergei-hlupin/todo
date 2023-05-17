@@ -1,23 +1,36 @@
-import React from "react";
+import React, { Component } from "react";
 import "./Todo.css";
+import PropTypes from "prop-types";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-export default class Todo extends React.Component {
+export default class Todo extends Component {
+  static propTypes = {
+    onDeleted: PropTypes.func.isRequired,
+    onToggleDone: PropTypes.func.isRequired,
+    title: PropTypes.string.isRequired,
+    completed: PropTypes.bool.isRequired,
+  };
+  static defaultProps = {
+    onToggleDone: () => {},
+    onDeleted: () => {},
+  };
   render() {
-    const { onDeleted, onToggleDone, title, completed } = this.props;
+    let { onDeleted, onToggleDone, title, completed, currentDate, date } = this.props;
     let classNamesSpan = "";
     let classNamesLi = "";
     if (completed) {
       classNamesSpan += " description";
       classNamesLi += "completed";
     }
-    let todoDate = formatDistanceToNow(new Date(2023, 4, 5));
+    let todoDate = formatDistanceToNow(date, currentDate, { includeSeconds: true });
     return (
       <li className={classNamesLi}>
         <div className="view">
           <input onChange={onToggleDone} className="toggle" type="checkbox" checked={completed} />
           <label>
-            <span className={classNamesSpan}>{title}</span>
+            <span onClick={onToggleDone} className={classNamesSpan}>
+              {title}
+            </span>
             <span className="created">created {todoDate} ago</span>
           </label>
           <button className="icon icon-edit"></button>

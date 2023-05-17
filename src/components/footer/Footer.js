@@ -1,6 +1,7 @@
 import React from "react";
 import TodoFilter from "../todoFilter/todoFilter";
 import "./Footer.css";
+import PropTypes from "prop-types";
 
 function Footer({ counter, onCompleted, clearCompleted, onActive, onAll }) {
   return (
@@ -13,5 +14,17 @@ function Footer({ counter, onCompleted, clearCompleted, onActive, onAll }) {
     </footer>
   );
 }
+
+Footer.defaultProps = {
+  clearCompleted: () => {},
+};
+
+Footer.protoTypes = {
+  counter: PropTypes.number,
+  onCompleted: PropTypes.func.isRequired,
+  clearCompleted: PropTypes.func.isRequired,
+  onActive: PropTypes.func.isRequired,
+  onAll: PropTypes.func.isRequired,
+};
 
 export default Footer;

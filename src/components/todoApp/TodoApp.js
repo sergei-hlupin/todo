@@ -6,17 +6,29 @@ import Footer from "../footer/Footer";
 
 export default class TodoApp extends Component {
   id = 1;
+
   state = {
     filter: "",
     todos: [],
+    date: new Date(),
   };
-  createTodoItem(title) {
+  componentDidMount() {
+    this.timerId = setInterval(() => this.tik, 1000);
+  }
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+  tick() {
+    this.setState({ date: new Date() });
+  }
+  createTodoItem = (title) => {
     return {
       title,
       id: this.id++,
       completed: false,
+      date: new Date(),
     };
-  }
+  };
   deleteItem = (id) => {
     this.setState(({ todos }) => {
       const idx = todos.findIndex((el) => el.id === id);
@@ -81,7 +93,12 @@ export default class TodoApp extends Component {
       <section className="todoapp">
         <NewTodo addItem={this.addItem} />
         <section className="main">
-          <TodoList todos={todos} onDeleted={this.deleteItem} onToggleDone={this.onToggleDone} />
+          <TodoList
+            todos={todos}
+            onDeleted={this.deleteItem}
+            onToggleDone={this.onToggleDone}
+            currentDate={this.state.date}
+          />
           <Footer
             onAll={this.onAll}
             onActive={this.onActive}

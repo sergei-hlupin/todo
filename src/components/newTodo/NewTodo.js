@@ -7,12 +7,14 @@ export default class NewTodo extends Component {
   };
   onChange = (e) => {
     this.setState({
-      label: e.target.value,
+      label: e.target.value.trimLeft(),
     });
   };
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.addItem(this.state.label);
+    if (this.state.label) {
+      this.props.addItem(this.state.label);
+    }
     this.setState({
       label: "",
     });
