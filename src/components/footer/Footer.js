@@ -1,14 +1,15 @@
-import React from "react";
-import TodoFilter from "../todoFilter/todoFilter";
-import "./Footer.css";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import TodoFilter from '../todoFilter/todoFilter';
+import './Footer.css';
 
 function Footer({ counter, onCompleted, clearCompleted, onActive, onAll }) {
   return (
     <footer className="footer">
       <span className="todo-count">{counter} items left</span>
       <TodoFilter onCompleted={onCompleted} onActive={onActive} onAll={onAll} />
-      <button onClick={clearCompleted} className="clear-completed">
+      <button type="button" onClick={clearCompleted} className="clear-completed">
         Clear completed
       </button>
     </footer>
@@ -19,10 +20,10 @@ Footer.defaultProps = {
   clearCompleted: () => {},
 };
 
-Footer.protoTypes = {
-  counter: PropTypes.number,
+Footer.propTypes = {
+  counter: PropTypes.number.isRequired,
   onCompleted: PropTypes.func.isRequired,
-  clearCompleted: PropTypes.func.isRequired,
+  clearCompleted: PropTypes.func,
   onActive: PropTypes.func.isRequired,
   onAll: PropTypes.func.isRequired,
 };

@@ -1,26 +1,27 @@
-import React, { Component } from "react";
-import "./TodoApp.css";
-import TodoList from "../todoList/TodoList";
-import NewTodo from "../newTodo/NewTodo";
-import Footer from "../footer/Footer";
+import React, { Component } from 'react';
+import './TodoApp.css';
+import TodoList from '../todoList/TodoList';
+import NewTodo from '../newTodo/NewTodo';
+import Footer from '../footer/Footer';
 
 export default class TodoApp extends Component {
   id = 1;
 
   state = {
-    filter: "",
+    filter: '',
     todos: [],
     date: new Date(),
   };
+
   componentDidMount() {
-    this.timerId = setInterval(() => this.tik, 1000);
+    
+    this.timerId = setInterval(() => this.setState({ date: new Date() }), 1000);
   }
+
   componentWillUnmount() {
     clearInterval(this.timerId);
   }
-  tick() {
-    this.setState({ date: new Date() });
-  }
+
   createTodoItem = (title) => {
     return {
       title,
@@ -29,6 +30,7 @@ export default class TodoApp extends Component {
       date: new Date(),
     };
   };
+
   deleteItem = (id) => {
     this.setState(({ todos }) => {
       const idx = todos.findIndex((el) => el.id === id);
@@ -38,6 +40,7 @@ export default class TodoApp extends Component {
       };
     });
   };
+
   addItem = (title) => {
     const newItem = this.createTodoItem(title);
     this.setState(({ todos }) => {
@@ -45,6 +48,7 @@ export default class TodoApp extends Component {
       return { todos: newArr };
     });
   };
+
   onToggleDone = (id) => {
     this.setState(({ todos }) => {
       const idx = todos.findIndex((el) => el.id === id);
@@ -56,34 +60,39 @@ export default class TodoApp extends Component {
       };
     });
   };
+
   onActive = () => {
-    this.setState({ filter: "active" });
+    this.setState({ filter: 'active' });
   };
+
   onCompleted = () => {
-    this.setState({ filter: "completed" });
+    this.setState({ filter: 'completed' });
   };
+
   onAll = () => {
-    this.setState({ filter: "all" });
+    this.setState({ filter: 'all' });
   };
+
   clearCompleted = () => {
     this.setState(({ todos }) => {
-      let newArr = todos.filter((item) => item.completed === false);
+      const newArr = todos.filter((item) => item.completed === false);
       return {
         todos: newArr,
       };
     });
   };
+
   render() {
-    let filter = this.state.filter;
-    let copyArr = [...this.state.todos];
-    let todos = copyArr.filter((item) => {
-      if (filter === "active") {
+    const filter = this.state.filter;
+    const copyArr = [...this.state.todos];
+    const todos = copyArr.filter((item) => {
+      if (filter === 'active') {
         return !item.completed;
       }
-      if (filter === "completed") {
+      if (filter === 'completed') {
         return item.completed;
       }
-      if (filter === "all") {
+      if (filter === 'all') {
         return item.completed || !item.completed;
       }
       return copyArr;
