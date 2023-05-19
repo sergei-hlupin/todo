@@ -1,10 +1,12 @@
 import React from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import PropTypes from 'prop-types';
+
 import './Todo.css';
 
 function Todo({ onDeleted, onToggleDone, title, completed, currentDate, date, id }) {
   let classNamesSpan = '';
+
   let classNamesLi = '';
   if (completed) {
     classNamesSpan += ' description';

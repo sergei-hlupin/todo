@@ -14,7 +14,6 @@ export default class TodoApp extends Component {
   };
 
   componentDidMount() {
-    
     this.timerId = setInterval(() => this.setState({ date: new Date() }), 1000);
   }
 
