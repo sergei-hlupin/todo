@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './NewTodo.css';
 
-export default class NewTodo extends Component {
+class NewTodo extends Component {
   state = {
     label: '',
   };
@@ -40,3 +40,5 @@ export default class NewTodo extends Component {
     );
   }
 }
+
+export default NewTodo;

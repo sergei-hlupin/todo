@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import './TodoApp.css';
-import TodoList from '../todoList/TodoList';
-import NewTodo from '../newTodo/NewTodo';
-import Footer from '../footer/Footer';
+import TodoList from '../TodoList/TodoList';
+import NewTodo from '../NewTodo/NewTodo';
+import Footer from '../Footer/Footer';
 
-export default class TodoApp extends Component {
+class TodoApp extends Component {
   id = 1;
 
   state = {
@@ -119,3 +119,5 @@ export default class TodoApp extends Component {
     );
   }
 }
+
+export default TodoApp;
