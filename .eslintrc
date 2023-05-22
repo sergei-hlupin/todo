@@ -49,6 +49,12 @@
     "react/jsx-props-no-spreading": [0],
     "react/forbid-prop-types": [0],
     "react/sort-comp": [0],
-    "prettier/prettier": ["error"]
+    "linebreak-style": ["error", "windows"],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
