@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TodoFilter.css';
 
 function TodoFilter({ onAll, onActive, onCompleted }) {
   return (

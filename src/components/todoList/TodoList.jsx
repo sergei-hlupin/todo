@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TodoList.css';
 import Todo from '../Todo/Todo';
 
 function TodoList({ todos, onDeleted, onToggleDone, currentDate, editItem }) {

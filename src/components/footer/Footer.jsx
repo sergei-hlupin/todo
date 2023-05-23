@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import TodoFilter from '../TodoFilter/TodoFilter';
-import './Footer.css';
 
 function Footer({ counter, onCompleted, clearCompleted, onActive, onAll }) {
   return (

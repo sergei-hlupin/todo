@@ -1,9 +1,6 @@
-/* eslint-disable react/no-unused-state */
 import React, { Component } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import PropTypes from 'prop-types';
-
-import './Todo.css';
 
 class Todo extends Component {
   static defaultProps = {
