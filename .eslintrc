@@ -50,6 +50,7 @@
     "react/forbid-prop-types": [0],
     "react/sort-comp": [0],
     "linebreak-style": ["error", "windows"],
+    "react/static-property-placement": [0],
     "prettier/prettier": [
       "error",
       {

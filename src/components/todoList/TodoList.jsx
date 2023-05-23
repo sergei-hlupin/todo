@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './TodoList.css';
 import Todo from '../Todo/Todo';
 
-function TodoList({ todos, onDeleted, onToggleDone, currentDate }) {
+function TodoList({ todos, onDeleted, onToggleDone, currentDate, editItem }) {
   return (
     <ul className="todo-list">
       {todos.map((item) => {
@@ -13,6 +13,7 @@ function TodoList({ todos, onDeleted, onToggleDone, currentDate }) {
             key={id}
             id={id}
             {...itemsProps}
+            editItem={editItem}
             onDeleted={() => onDeleted(id)}
             onToggleDone={() => onToggleDone(id)}
             currentDate={currentDate}

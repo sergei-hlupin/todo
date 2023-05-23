@@ -48,6 +48,18 @@ class TodoApp extends Component {
     });
   };
 
+  editItem = (newTitle, id) => {
+    this.setState(({ todos }) => {
+      const idx = todos.findIndex((el) => el.id === id);
+      const oldItem = todos[idx];
+      const newItem = { ...oldItem, title: newTitle };
+      const newArr = [...todos.slice(0, idx), newItem, ...todos.slice(idx + 1)];
+      return {
+        todos: newArr,
+      };
+    });
+  };
+
   onToggleDone = (id) => {
     this.setState(({ todos }) => {
       const idx = todos.findIndex((el) => el.id === id);
@@ -106,6 +118,7 @@ class TodoApp extends Component {
             onDeleted={this.deleteItem}
             onToggleDone={this.onToggleDone}
             currentDate={this.state.date}
+            editItem={this.editItem}
           />
           <Footer
             onAll={this.onAll}
