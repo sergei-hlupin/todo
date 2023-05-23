@@ -20,9 +20,11 @@ class Todo extends Component {
   };
 
   onEditing = () => {
-    this.setState({
-      edit: true,
-    });
+    if (this.props.completed === false) {
+      this.setState({
+        edit: true,
+      });
+    }
   };
 
   onChangeEdit = (e) => {
