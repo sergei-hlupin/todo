@@ -51,6 +51,7 @@
     "react/sort-comp": [0],
     "linebreak-style": [0],
     "react/static-property-placement": [0],
+    "class-methods-use-this":"off",
     "prettier/prettier": [
       "error",
       {

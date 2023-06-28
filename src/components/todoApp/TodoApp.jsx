@@ -20,12 +20,13 @@ class TodoApp extends Component {
     clearInterval(this.timerId);
   }
 
-  createTodoItem = (title) => {
+  createTodoItem = (title, sumSecond) => {
     return {
       title,
       id: this.id++,
       completed: false,
       date: new Date(),
+      sumSecond,
     };
   };
 
@@ -39,8 +40,8 @@ class TodoApp extends Component {
     });
   };
 
-  addItem = (title) => {
-    const newItem = this.createTodoItem(title);
+  addItem = (title, sumSecond) => {
+    const newItem = this.createTodoItem(title, sumSecond);
     this.setState(({ todos }) => {
       const newArr = [...todos, newItem];
       return { todos: newArr };
@@ -110,7 +111,10 @@ class TodoApp extends Component {
     const counter = todos.filter((item) => item.completed === false).length;
     return (
       <section className="todoapp">
-        <NewTodo addItem={this.addItem} />
+        <header className="header">
+          <h1>todos</h1>
+          <NewTodo addItem={this.addItem} />
+        </header>
         <section className="main">
           <TodoList
             todos={todos}
