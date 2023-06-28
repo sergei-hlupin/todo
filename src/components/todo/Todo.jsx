@@ -63,8 +63,13 @@ class Todo extends Component {
             checked={completed}
           />
           <label htmlFor={id}>
-            <span className="description">{title}</span>
-            <span className="created">created {todoDate} ago</span>
+            <span className="title">{title}</span>
+            <span className="description">
+              <button type="button" className="icon icon-play" aria-label="play" />
+              <button type="button" className="icon icon-pause" aria-label="pause" />
+              12:25
+            </span>
+            <span className="description">created {todoDate} ago</span>
           </label>
           <button
             type="button"
