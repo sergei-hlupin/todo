@@ -1,21 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function TodoFilter({ onAll, onActive, onCompleted }) {
+function TodoFilter({ onFilter }) {
   return (
     <ul className="filters">
       <li>
-        <button type="button" onClick={onAll}>
+        <button type="button" onClick={() => onFilter('all')}>
           All
         </button>
       </li>
       <li>
-        <button type="button" onClick={onActive}>
+        <button type="button" onClick={() => onFilter('active')}>
           Active
         </button>
       </li>
       <li>
-        <button type="button" onClick={onCompleted}>
+        <button type="button" onClick={() => onFilter('completed')}>
           Completed
         </button>
       </li>
