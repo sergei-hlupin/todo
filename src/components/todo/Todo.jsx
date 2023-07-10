@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 
-function Todo({ todo, removeTodo, currentDate, editTodo, onToggleDone }) {
+function Todo({ todo, removeTodo, currentDate, editTodo, onToggleDone, editSumSecond }) {
   const [title, setTitle] = useState(todo.title);
   const [edit, setEdit] = useState(false);
+  const [timerTodo, setTimerTodo] = useState(todo.sumSecond);
+  const [isPlay, setIsPlay] = useState(false);
 
-  const divisorMinutes = todo.sumSecond % (60 * 60);
+  useEffect(() => {
+    const myInterval = setInterval(() => {
+      if (isPlay) {
+        setTimerTodo((timerTodo) => (timerTodo > 0 ? timerTodo - 1 : 0));
+      } else {
+        clearInterval(myInterval);
+      }
+    }, 1000);
+
+    return () => {
+      editSumSecond(timerTodo, todo.id);
+      clearInterval(myInterval);
+    };
+  }, [isPlay]);
+
+  const divisorMinutes = timerTodo % (60 * 60);
   const minutes = Math.floor(divisorMinutes / 60);
   const divisorSeconds = divisorMinutes % 60;
   const seconds = Math.ceil(divisorSeconds);
@@ -38,8 +55,18 @@ function Todo({ todo, removeTodo, currentDate, editTodo, onToggleDone }) {
         <label htmlFor={todo.id}>
           <span className="title">{title}</span>
           <span className="description">
-            <button type="button" className="icon icon-play" aria-label="play" />
-            <button type="button" className="icon icon-pause" aria-label="pause" />
+            <button
+              onClick={() => setIsPlay(true)}
+              type="button"
+              className="icon icon-play"
+              aria-label="play"
+            />
+            <button
+              onClick={() => setIsPlay(false)}
+              type="button"
+              className="icon icon-pause"
+              aria-label="pause"
+            />
             {minutes}:{seconds}
           </span>
           <span className="description">created {todoDate} ago</span>

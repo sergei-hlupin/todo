@@ -1,7 +1,7 @@
 import React from 'react';
 import Todo from '../Todo/Todo';
 
-function TodoList({ todos, removeTodo, currentDate, editTodo, onToggleDone }) {
+function TodoList({ todos, removeTodo, currentDate, editTodo, onToggleDone, editSumSecond }) {
   return (
     <ul className="todo-list">
       {todos.map((todo) => {
@@ -13,6 +13,7 @@ function TodoList({ todos, removeTodo, currentDate, editTodo, onToggleDone }) {
             currentDate={currentDate}
             editTodo={editTodo}
             onToggleDone={onToggleDone}
+            editSumSecond={editSumSecond}
           />
         );
       })}
